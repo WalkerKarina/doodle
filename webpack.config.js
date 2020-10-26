@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
+
 module.exports = {
   // webpack config
   entry: "./src/index.js",
@@ -14,4 +15,12 @@ module.exports = {
       inject: "body",
     }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
 };
