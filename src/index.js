@@ -6,6 +6,7 @@ var canvas;
 var coords = [];
 var mousePressed = false;
 var classNames = [];
+var names;
 
 $(function() {
   canvas = window._canvas = new fabric.Canvas('canvas');
@@ -17,7 +18,7 @@ $(function() {
 
   //Event listeners for mouse movement
   canvas.on('mouse:up', function(e) {
-      getFrame();
+      getPrediction();
       mousePressed = false
   });
   canvas.on('mouse:down', function(e) {
@@ -78,7 +79,7 @@ function getMinBox() {
 function allowDrawing() {
   canvas.isDrawingMode = 1;
   //document.getElementById('status').innerHTML = 'Model Loaded';
-  //$('button').prop('disabled', false);
+  $('button').prop('disabled', false);
   //var slider = document.getElementById('myRange');
   // slider.oninput = function() {
   //     canvas.freeDrawingBrush.width = this.value;
@@ -121,6 +122,7 @@ async function loadDict() {
         let symbol = list[i]
         classNames[i] = symbol
     }
+    randomClassName()
   })
   .catch(err => { throw err });
 }
@@ -150,7 +152,7 @@ function findTopValues(inp, count) {
     return outp
 }
 
-function getFrame() {
+function getPrediction() {
     //make sure we have at least two recorded coordinates 
   if (coords.length >= 2) {
 
@@ -162,13 +164,28 @@ function getFrame() {
 
     //find the top 5 predictions 
     const indices = findIndicesOfMax(pred, 5)
-    const probs = findTopValues(pred, 5)
-    const names = getClassNames(indices)
+    const probs = findTopValues(pred, 5) 
+    names = getClassNames(indices)
     console.log("Names: ")
     console.log(names)
+    display()
   }
 }
+var maxAppend = 0;
 
+function display(){
+  for (var i=0; i<names.length; i++ ){
+    console.log(names[i])
+    if (maxAppend < 5) {
+      $( "#list" ).append('<li>' + names[i] + '</li>')
+      maxAppend = maxAppend + 1
+      console.log(maxAppend)
+    } else if (maxAppend >= 5) {
+      $( "#list li" ).first().remove()
+      $( "#list" ).append('<li>' + names[i] + '</li>')
+    }
+  }
+} 
 
 async function loadModel() {  
   const path = 'http://127.0.0.1:8000/model/model.json';
@@ -191,5 +208,12 @@ function erase() {
   canvas.clear();
   canvas.backgroundColor = '#ffffff';
   coords = [];
-    
+  console.log("running erase from js")
+}
+
+function randomClassName() {
+  var randomNum = Math.floor(Math.random()*10);
+  var command = classNames[randomNum]
+  $( "#command" ).append('<p>' + command + '</p>')
+
 }
