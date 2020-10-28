@@ -78,7 +78,7 @@ function getMinBox() {
 
 function allowDrawing() {
   canvas.isDrawingMode = 1;
-  //document.getElementById('status').innerHTML = 'Model Loaded';
+  // document.getElementById('status').innerHTML = 'Model Loaded';
   $('button').prop('disabled', false);
   //var slider = document.getElementById('myRange');
   // slider.oninput = function() {
@@ -122,7 +122,7 @@ async function loadDict() {
         let symbol = list[i]
         classNames[i] = symbol
     }
-    randomClassName()
+    randomClassNameFirst()
   })
   .catch(err => { throw err });
 }
@@ -175,11 +175,9 @@ var maxAppend = 0;
 
 function display(){
   for (var i=0; i<names.length; i++ ){
-    console.log(names[i])
     if (maxAppend < 5) {
       $( "#list" ).append('<li>' + names[i] + '</li>')
       maxAppend = maxAppend + 1
-      console.log(maxAppend)
     } else if (maxAppend >= 5) {
       $( "#list li" ).first().remove()
       $( "#list" ).append('<li>' + names[i] + '</li>')
@@ -204,16 +202,22 @@ async function loadModel() {
 
 loadModel();
 
-function erase() {
+$( "#erase" ).click( function(){
   canvas.clear();
   canvas.backgroundColor = '#ffffff';
   coords = [];
-  console.log("running erase from js")
-}
+  console.log("Running erase from js")
+});
 
-function randomClassName() {
+function randomClassNameFirst() {
   var randomNum = Math.floor(Math.random()*10);
   var command = classNames[randomNum]
-  $( "#command" ).append('<p>' + command + '</p>')
-
+  $( "#command" ).append('<br></br> <span style="text-align: center; border:2px solid #89cff0; padding: 10px; color: #89cff0; margin: 10px;">' + command + '</span>')
 }
+
+$( "#randomClassNameAppend" ).click( function(){
+  var randomNum = Math.floor(Math.random()*10)
+  var command = classNames[randomNum]
+  $( "#command" ).html('<br></br> <span style="text-align: center; border:2px solid #89cff0; padding: 10px; color: #89cff0; margin: 10px;">' + command + '</span>')
+
+});

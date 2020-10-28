@@ -21,34 +21,30 @@
 			<canvas id="canvas" width="300" height="300" class="canvas" ></canvas>
 		</div>
 		<div class="flex-child">
-			<span id="command">Things you can draw...</span>
-		</div>
+			<div class="guidance"> 
+				Things you can draw...
+				<span id="command">
+				</span>
+				<button id="randomClassNameAppend" type="button" disabled>More</button>
+			</div>
 
+		</div>
 		<div class="flex-child">
-			<span class="guess">Doodle's guess...</span>
-			<ol id="list">
-			</ol> 
+			<div class="guidance">
+				<span class="guess">Doodle's guess...</span>
+				<ol id="list">
+				</ol> 
+			</div>
 		</div>
 	</div>
 	<div>
-		<script type="text/javascript">
-			function erase() {
-				//not sure why clear() is not defined
-			    //canvas.clear();
-				canvas.backgroundColor = '#ffffff';
-				coords = [];
-				console.log("Has canvas been cleared?")
-				console.log(canvas)
-				console.log(model)
-			}
-		</script>
-		<button type="button" onclick='erase()' disabled>Clear</button>
+		<button id="erase" type="button" disabled>Clear</button>
 	</div> 
 	<footer>
-		<p id="explain"> Doodle uses a neural network trained on a subset of the <i>Quick Draw</i> Google AI Dataset. Model is loaded in broswer using TensorFlowJS. As such, accuracy is sacrificed for limited browser memory.
+		<p id="explain"> Doodle uses a Convolutional Neural Network trained on a subset of the <a class="links" href="https://quickdraw.withgoogle.com/"><i>Quick Draw</i></a> Google AI Dataset. Model is loaded in broswer using TensorFlowJS. Accuracy is sacrificed for limited browser memory.
 		</p>
 		<p class="credits">Made by Karina Walker</p>
-		<a class="credits" href="mailto:karina.walker.nicky@gmail.com">karina.walker.nicky@gmail.com</a></p>
+		<a class="credits links" href="mailto:karina.walker.nicky@gmail.com">karina.walker.nicky@gmail.com</a></p>
 	</footer>
 </body>
 </html>
