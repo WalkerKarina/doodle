@@ -183,7 +183,7 @@ function display(){
       $( "#list" ).append('<li>' + names[i].replace("_", " ") + '</li>')
     }
   }
-} 
+}
 
 async function loadModel() {  
   const path = 'http://127.0.0.1:8000/model/model.json';

@@ -1,5 +1,6 @@
 /node_modules
-/model
+/model/class_names.txt
+/model/group1-shard1of1.bin
 
 # misc
 .DS_Store
