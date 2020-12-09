@@ -176,11 +176,11 @@ var maxAppend = 0;
 function display(){
   for (var i=0; i<names.length; i++ ){
     if (maxAppend < 5) {
-      $( "#list" ).append('<li>' + names[i] + '</li>')
+      $( "#list" ).append('<li>' + names[i].replace("_", " ") + '</li>')
       maxAppend = maxAppend + 1
     } else if (maxAppend >= 5) {
       $( "#list li" ).first().remove()
-      $( "#list" ).append('<li>' + names[i] + '</li>')
+      $( "#list" ).append('<li>' + names[i].replace("_", " ") + '</li>')
     }
   }
 } 
@@ -211,13 +211,13 @@ $( "#erase" ).click( function(){
 
 function randomClassNameFirst() {
   var randomNum = Math.floor(Math.random()*10);
-  var command = classNames[randomNum]
+  var command = classNames[randomNum].replace("_", " ")
   $( "#command" ).append('<br></br> <span style="text-align: center; border:2px solid #89cff0; padding: 10px; color: #89cff0; margin: 10px;">' + command + '</span>')
 }
 
 $( "#randomClassNameAppend" ).click( function(){
   var randomNum = Math.floor(Math.random()*10)
-  var command = classNames[randomNum]
+  var command = classNames[randomNum].replace("_", " ")
   $( "#command" ).html('<br></br> <span style="text-align: center; border:2px solid #89cff0; padding: 10px; color: #89cff0; margin: 10px;">' + command + '</span>')
 
 });
