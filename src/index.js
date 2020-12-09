@@ -112,8 +112,9 @@ function getClassNames(indices) {
 }
 
 async function loadDict() {
-  var url = 'http://127.0.0.1:8000/model/class_names.txt';
-    
+  //var url = 'http://127.0.0.1:8000/model/classNames.txt';
+  var url = './model/classNames.txt';
+
   fetch(url)
   .then(res => res.text())
   .then((data) => {
