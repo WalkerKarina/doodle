@@ -15,6 +15,8 @@ Conda virtual environment used.<br />
 
 ### `npm run deploy`
 
+To publish page on Github Pages.
+
 1. npm install gh-pages --save-dev<br />
 2. Remove dist from .gitignore<br />
 3. git add dist && git commit -m "add dist" <br />
