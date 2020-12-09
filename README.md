@@ -23,7 +23,8 @@ To publish page on Github Pages.
 4. git push <br />
 5. "homepage": "http://walkerkarina.github.io/doodle" in package.json<br />
 6. Inside scrips, "deploy": "gh-pages -d dist" <br />
-7. npm run deploy <br />
+7. npx webpack — to update dist folder.
+8. npm run deploy <br />
 
 
 
