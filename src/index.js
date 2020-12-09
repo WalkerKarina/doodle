@@ -186,7 +186,8 @@ function display(){
 }
 
 async function loadModel() {  
-  const path = 'http://127.0.0.1:8000/model/model.json';
+  //const path = 'http://127.0.0.1:8000/model/model.json';
+  const path = './model/model.json';
   model = await tf.loadLayersModel(path)
 
   console.log("Model: ")
