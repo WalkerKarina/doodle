@@ -1,6 +1,5 @@
 /node_modules
 /model
-/dist
 
 # misc
 .DS_Store
