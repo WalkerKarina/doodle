@@ -1,50 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Smart Sketch — Doodle</title>
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<!-- Popper JS Library -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-	<!-- TensorFlow.js -->
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
-</head>
-<body>
-	<div id="nav">
-		<h1>Doodle</h1>
-	</div>
-	<h2>Doodle away! </h2>
-	
-	<div class="flex-container"> 
-		<div class="flex-child">
-			<canvas id="canvas" width="300" height="300" class="canvas" ></canvas>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Smart Sketch — Doodle</title>
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!-- Popper JS Library -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+		<!-- TensorFlow.js -->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+	</head>
+	<body>
+		<div id="nav">
+			<h1>Doodle</h1>
 		</div>
-		<div class="flex-child">
-			<div class="guidance"> 
-				Draw This:
-				<span id="command">
-				</span>
-				<button id="randomClassNameAppend" type="button" disabled>More</button>
+		<div class="flex-container">
+			<div class="flex-child">
+				<canvas
+					id="canvas"
+					width="300"
+					height="300"
+					class="canvas"
+				></canvas>
+				<button id="erase" type="button" disabled>Clear</button>
 			</div>
-
-		</div>
-		<div class="flex-child">
-			<div class="guidance">
-				<span class="guess">Doodle's Guess:</span>
-				<ol id="list">
-				</ol> 
+			<div class="flex-child">
+				<div class="guidance">
+					Draw This:
+					<span id="command"> </span>
+					<button id="randomClassNameAppend" type="button" disabled>
+						More
+					</button>
+				</div>
+			</div>
+			<div class="flex-child">
+				<div class="guidance">
+					<span class="guess">Doodle's Guess:</span>
+					<ol id="list"></ol>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div>
-		<button id="erase" type="button" disabled>Clear</button>
-	</div> 
-	<footer>
-		<p id="explain"> Doodle uses a Convolutional Neural Network trained on a subset of the <a class="links" href="https://quickdraw.withgoogle.com/"><i>Quick Draw</i></a> Google AI Dataset. Model is loaded in browser using TensorFlowJS. Accuracy is sacrificed for limited browser memory. Written with Vanilla JS, jQuery, and Webpack.
-		</p>
-		<p class="credits">Made by Karina Walker</p>
-		<a class="credits links" href="mailto:karina.walker.nicky@gmail.com">karina.walker.nicky@gmail.com</a></p>
-	</footer>
-</body>
+		<footer style="padding-top: 50px">
+			<p id="explain">
+				Doodle uses a Convolutional Neural Network trained on a subset
+				of the
+				<a class="links" href="https://quickdraw.withgoogle.com/"
+					><i>Quick Draw</i></a
+				>
+				Google AI Dataset. All predictions run entirely in browser using
+				TensorFlow.js. Model size is 0.5MB Built with Vanilla JS,
+				jQuery,and Webpack.
+			</p>
+			<p class="credits">
+				Made by
+				<a
+					class="credits links"
+					href="mailto:karina.walker.nicky@gmail.com"
+					>Karina Walker</a
+				>
+			</p>
+		</footer>
+	</body>
 </html>
