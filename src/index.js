@@ -2,11 +2,11 @@ import { fabric } from "fabric";
 import "./styles.css";
 
 var model;
-var canvas;
-var coords = [];
 var mousePressed = false;
 var classNames = [];
 var names;
+var canvas;
+var coordinates = [];
 
 $(function () {
   canvas = window._canvas = new fabric.Canvas("canvas");
@@ -25,22 +25,21 @@ $(function () {
     mousePressed = true;
   });
   canvas.on("mouse:move", function (e) {
-    recordCoor(e);
+    recordCoordinates(e);
   });
 });
 
-function recordCoor(event) {
+function recordCoordinates(event) {
   var pointer = canvas.getPointer(event.e);
   var posX = pointer.x;
   var posY = pointer.y;
-
   if (posX >= 0 && posY >= 0 && mousePressed) {
-    coords.push(pointer);
+    coordinates.push(pointer);
   }
 }
 
 function getImageData() {
-  //get the minimum bounding box around the drawing
+  //get the "minimum bounding box" around the drawing
   const mbb = getMinBox();
 
   //get image data according to device pixel ratio
@@ -55,28 +54,29 @@ function getImageData() {
   return imgData;
 }
 
+//gets minium bounding box
 function getMinBox() {
-  //get coordinates
-  var coorX = coords.map((point) => {
+  //get curser coordinates 
+  var coorX = coordinates.map((point) => {
     return point.x;
   });
-  var coorY = coords.map((point) => {
+  var coorY = coordinates.map((point) => {
     return point.y;
   });
 
-  //find top left and bottom right corners
-  var min_coords = {
+  //finds corner coordinates of top left and bottom right 
+  var min_coordinates = {
     x: Math.min.apply(null, coorX),
     y: Math.min.apply(null, coorY),
   };
-  var max_coords = {
+  var max_coordinates = {
     x: Math.max.apply(null, coorX),
     y: Math.max.apply(null, coorY),
   };
 
   return {
-    min: min_coords,
-    max: max_coords,
+    min: min_coordinates,
+    max: max_coordinates,
   };
 }
 
@@ -84,21 +84,17 @@ function allowDrawing() {
   canvas.isDrawingMode = 1;
   // document.getElementById('status').innerHTML = 'Model Loaded';
   $("button").prop("disabled", false);
-  //var slider = document.getElementById('myRange');
-  // slider.oninput = function() {
-  //     canvas.freeDrawingBrush.width = this.value;
-  // };
 }
 
 function preprocess(imgData) {
   return tf.tidy(() => {
-    //convert to a tensor
+    //converted to a tensor
     let tensor = tf.browser.fromPixels(imgData, 1);
 
-    //resize
+    //resize using tf
     const resized = tf.image.resizeBilinear(tensor, [28, 28]).toFloat();
 
-    //normalize
+    //normalize, change dimensions
     const offset = tf.scalar(255.0);
     const normalized = tf.scalar(1.0).sub(resized.div(offset));
 
@@ -152,14 +148,14 @@ function findIndicesOfMax(inp, count) {
 function findTopValues(inp, count) {
   var outp = [];
   let indices = findIndicesOfMax(inp, count);
-  // show 5 greatest scores
+  // shows 5 greatest scores
   for (var i = 0; i < indices.length; i++) outp[i] = inp[indices[i]];
   return outp;
 }
 
 function getPrediction() {
   //make sure we have at least two recorded coordinates
-  if (coords.length >= 2) {
+  if (coordinates.length >= 2) {
     //get the image data from the canvas
     const imgData = getImageData();
 
@@ -210,7 +206,7 @@ loadModel();
 $("#erase").click(function () {
   canvas.clear();
   canvas.backgroundColor = "#ffffff";
-  coords = [];
+  coordinates = [];
   console.log("Running erase from js");
 });
 
