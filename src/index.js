@@ -211,7 +211,7 @@ $("#erase").click(function () {
 });
 
 function randomClassNameFirst() {
-  var randomNum = Math.floor(Math.random() * 10);
+  var randomNum = Math.floor(Math.random() * 100);
   var command = classNames[randomNum].replace("_", " ");
   $("#command").append(
     '<br></br> <span style="text-align: center; border:2px solid #89cff0; padding: 10px; color: #89cff0; margin: 10px 0px 10px 0px;">' +
@@ -221,8 +221,9 @@ function randomClassNameFirst() {
 }
 
 $("#randomClassNameAppend").click(function () {
-  var randomNum = Math.floor(Math.random() * 10);
+  var randomNum = Math.floor(Math.random() * 100);
   var command = classNames[randomNum].replace("_", " ");
+  console.log(command + " command")
   $("#command").html(
     '<br></br> <span style="text-align: center; border:2px solid #89cff0; padding: 10px; color: #89cff0; margin: 10px 0px 10px 0px;"">' +
       command +
